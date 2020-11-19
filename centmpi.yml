@@ -16,12 +16,12 @@
   tasks:
 
   - name: Update centOS...
-    apt: update_cache=yes
+    yum: update_cache=yes
     tags:
       - easy
 
   - name: Install required packages ...
-    apt: name={{ item }} state=present
+    yum: name={{ item }} state=present
     with_items:
      - build-essential
      - python-dev
@@ -42,7 +42,7 @@
       - easy
 
   - name: Install openmpi
-    apt: name={{ item }} state=present
+    yum: name={{ item }} state=present
     with_items:
       - openmpi-bin
       - openmpi-doc
@@ -53,7 +53,7 @@
       - easy
 
   - name: Install git
-    apt: name={{ item }} state=present
+    yum: name={{ item }} state=present
     with_items:
       - git
     tags:
