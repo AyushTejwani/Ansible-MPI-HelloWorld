@@ -14,41 +14,13 @@
     mpi_tutorial_repo_dest: "{{ DEBUG_LOCATION }}/mpitutorial-master"
   name: OpenMPI Deployment beginning ...
   tasks:
+=
 
-  - name: Update centOS...
-    yum: update_cache=yes
-    tags:
-      - easy
-
-  - name: Install required packages ...
-    yum: name={{ item }} state=present
-    with_items:
-     - build-essential
-     - python-dev
-     - python-pip
-     - python-mpi4py
-     - python3-mpi4py
-    tags:
-      - easy
-
-
-  - name: Disable Strict Host Key Checking in SSH Config
-    lineinfile: >
-      dest=/etc/ssh/ssh_config
-      line="StrictHostKeyChecking no" 
-      insertafter='EOF' 
-      state=present
-    tags:
-      - easy
 
   - name: Install openmpi
     yum: name={{ item }} state=present
     with_items:
-      - openmpi-bin
-      - openmpi-doc
-      - libopenmpi-dev
-      - openmpi-checkpoint
-      - openmpi-common
+      - openmpi
     tags:
       - easy
 
