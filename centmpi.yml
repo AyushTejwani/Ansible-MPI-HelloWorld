@@ -2,7 +2,7 @@
 #
 #
 - hosts: testgroup
-  user: ubuntu
+  user: centOS
   become: yes
   vars:
     TEMP_LOCATION: /tmp/openmpi
@@ -15,7 +15,7 @@
   name: OpenMPI Deployment beginning ...
   tasks:
 
-  - name: Update ubuntu ...
+  - name: Update centOS...
     apt: update_cache=yes
     tags:
       - easy
