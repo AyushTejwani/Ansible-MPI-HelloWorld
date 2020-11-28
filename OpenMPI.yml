@@ -101,7 +101,7 @@
       - easy
 
   - name: Build JTRs
-    shell: sudo make -sj4
+    shell: sudo make 
     args:
       chdir: "{{ johntheripper_dest }}/src"
     tags:
