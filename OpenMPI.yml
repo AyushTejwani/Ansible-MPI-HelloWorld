@@ -73,4 +73,9 @@
     tags:
       - easy
 
-  
+  - name: Git clone JTR
+    git:
+        repo: 'https://github.com/magnumripper/JohnTheRipper.git'
+        dest: /home/vagrant/JohnTheRipper
+    tags:
+      - easy
