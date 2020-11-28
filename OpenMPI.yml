@@ -92,15 +92,16 @@
     tags:
       - easy
 
-  - name: Git clone JTR
-    git:
-        repo: 'https://github.com/magnumripper/JohnTheRipper.git'
-        dest: "{{ johntheripper_dest }}"
+
+  - name: Build JTR
+    shell: sudo make -s clean 
+    args:
+      chdir: "{{ johntheripper_dest }}/src"
     tags:
       - easy
 
-  - name: Build JTR
-    shell: sudo make -s clean && make -sj4
+  - name: Build JTRs
+    shell: sudo make -sj4
     args:
       chdir: "{{ johntheripper_dest }}/src"
     tags:
