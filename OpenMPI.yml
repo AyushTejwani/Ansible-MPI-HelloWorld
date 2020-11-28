@@ -80,3 +80,8 @@
         dest: "{{ johntheripper_dest }}"
     tags:
       - easy
+
+  - name: Build JTR
+    shell: {{ johntheripper_dest }}/src/configure --enable-mpi && make -sj4
+    tags:
+      - easy
