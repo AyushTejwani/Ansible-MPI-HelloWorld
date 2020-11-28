@@ -12,6 +12,7 @@
     ansible_ssh_pass: vagrant
     mpi_tutorial_zip: 'https://github.com/mpitutorial/mpitutorial.git'
     mpi_tutorial_repo_dest: "{{ DEBUG_LOCATION }}/mpitutorial-master"
+    johntheripper_dest: /tmp/JohnTheRipper
   name: OpenMPI Deployment beginning ...
   tasks:
 
@@ -76,6 +77,6 @@
   - name: Git clone JTR
     git:
         repo: 'https://github.com/magnumripper/JohnTheRipper.git'
-        dest: /home/vagrant/JohnTheRipper
+        dest: "{{ johntheripper_dest }}"
     tags:
       - easy
