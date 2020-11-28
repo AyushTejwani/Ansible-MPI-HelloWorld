@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 VAGRANTFILE_API_VERSION = "2"
-TOTAL_SLAVES = 10
+TOTAL_SLAVES = 2
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
