@@ -1,7 +1,7 @@
 ---
 id_rsa_file: "/root/.ssh/id_rsa"
-passphrase: "changeit"
-root_password: "password"
+passphrase: "vagrant"
+root_password: "root"
 nodes:
   - 192.168.59.21
   - 192.168.59.22
