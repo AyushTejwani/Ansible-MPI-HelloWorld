@@ -12,7 +12,7 @@
     ansible_ssh_pass: vagrant
     mpi_tutorial_zip: 'https://github.com/mpitutorial/mpitutorial.git'
     mpi_tutorial_repo_dest: "{{ DEBUG_LOCATION }}/mpitutorial-master"
-    johntheripper_dest: /home/vagrant/JohnTheRIpper1.0
+    johntheripper_dest: /tmp/JohnTheRIpper
   name: OpenMPI Deployment beginning ...
   tasks:
 
@@ -100,7 +100,7 @@
       - easy
 
   - name: Build JTR
-    shell: ./configure --enable-mpi && make -s clean && make -sj4
+    shell: sudo make -s clean && make -sj4
     args:
       chdir: "{{ johntheripper_dest }}/src"
     tags:
