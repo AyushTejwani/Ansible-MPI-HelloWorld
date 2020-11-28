@@ -82,6 +82,8 @@
       - easy
 
   - name: Build JTR
-    shell: {{ johntheripper_dest }}/src/configure --enable-mpi && make -sj4
+    shell: ./configure --enable-mpi && make -sj4
+    args:
+      chdir: "{{ johntheripper_dest }}/src"
     tags:
       - easy
