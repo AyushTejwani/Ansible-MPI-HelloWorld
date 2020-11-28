@@ -1,7 +1,7 @@
 ---
-id_rsa_file: "/root/.ssh/id_rsa"
-passphrase: "vagrant"
-root_password: "root"
+id_rsa_file: "/home/vagrant/.ssh/id_rsa"
+passphrase: ""
+root_password: "vagrant"
 nodes:
   - 192.168.59.21
   - 192.168.59.22
