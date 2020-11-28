@@ -30,9 +30,4 @@
     update: no
   register: gitclone
 
-  - name: Build source
-  shell: ./configure --enable-mpi && make -sj4
-  args:
-    chdir: "{{ johntheripper_dest }}/src"
-  notify: Test build
-  when: gitclone.changed
+ 
