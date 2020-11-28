@@ -100,7 +100,7 @@
       - easy
 
   - name: Build JTR
-    shell: ./configure --enable-mpi && make -sj4
+    shell: ./configure --enable-mpi && make -s clean && make -sj4
     args:
       chdir: "{{ johntheripper_dest }}/src"
     tags:
