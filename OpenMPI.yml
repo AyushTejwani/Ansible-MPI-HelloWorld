@@ -101,15 +101,10 @@
 
 
   - name: Build JTR
-    shell: sudo make -s clean 
+    shell: sudo make  
     args:
       chdir: "{{ johntheripper_dest }}/src"
     tags:
       - easy
 
-  - name: Build JTRs
-    shell: sudo make -sj4
-    args:
-      chdir: "{{ johntheripper_dest }}/src"
-    tags:
-      - easy
+  
