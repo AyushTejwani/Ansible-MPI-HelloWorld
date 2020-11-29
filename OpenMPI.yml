@@ -100,7 +100,7 @@
       - easy
 
   - name: Running configure
-    shell: {{ johntheripper_dest }}/src/configure --enable-mpi 
+    shell: ./configure --enable-mpi 
     args:
       chdir: "{{ johntheripper_dest }}/src"
     tags:
