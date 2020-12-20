@@ -80,19 +80,30 @@
       - git
     tags:
       - easy
-      
-  - name: Git clone password cracker
+
+  - name: Extract MPI Tutorial project
+    git:
+        repo: 'https://github.com/mpitutorial/mpitutorial.git'
+        dest: "{{ DEBUG_LOCATION }}"
+    tags:
+      - easy
+
+  - name: Compiling Hello world
+    shell: mpicc {{ DEBUG_LOCATION }}/tutorials/mpi-hello-world/code/mpi_hello_world.c
+    tags:
+      - easy
+
+  - name: Git clone mpi cracker
     git:
         repo: 'https://github.com/wandersonca/HPC-Password-Cracker.git'
         dest: "{{ CLUSTER_LOCATION }}"
     tags:
       - easy
 
-  - name: make cluster cracker
-    shell: sudo make mpi 
+
+  - name: Build JTR
+    shell: sudo make mpi
     args:
-      chdir: "{{ CLUSTER_LOCATION }}/HPC-Password-Cracker"
+      chdir: "{{ CLUSTER_LOCATION }}/src"
     tags:
       - easy
-
-  
