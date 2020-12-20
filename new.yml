@@ -1,0 +1,98 @@
+---
+#
+#
+- hosts: testgroup
+  user: ubuntu
+  become: yes
+  vars:
+    TEMP_LOCATION: /tmp/openmpi
+    FINAL_LOCATION: /opt/openmpi-1.10.2
+    DEBUG_LOCATION: /tmp/openMPI-examples
+    CLUSTER_LOCATION: /tmp/cluster_password_cracker
+    ansible_ssh_user: vagrant
+    ansible_ssh_pass: vagrant
+    mpi_tutorial_zip: 'https://github.com/mpitutorial/mpitutorial.git'
+    password_cracker_zip: 'https://github.com/wandersonca/HPC-Password-Cracker'
+    password_cracker_dest: "{{ CLUSTER_LOCATION }}/HPC-Password-Cracker"
+    mpi_tutorial_repo_dest: "{{ DEBUG_LOCATION }}/mpitutorial-master"
+    johntheripper_dest: /tmp/JohnTheRipper
+  name: OpenMPI Deployment beginning ...
+  tasks:
+
+  - name: Update ubuntu ...
+    apt: update_cache=yes
+    tags:
+      - easy
+
+  - name: Install required packages for MPI
+    apt: name={{ item }} state=present
+    with_items:
+     - build-essential
+     - python-dev
+     - python-pip
+     - python-mpi4py
+     - python3-mpi4py
+    tags:
+      - easy
+
+  - name: Install required packages for JTR
+    apt: name={{ item }} state=present
+    with_items:
+    - build-essential
+    - libssl-dev
+    - git
+    # Recommended (extra formats and performance)
+    - yasm
+    - libgmp-dev
+    - libpcap-dev
+    - pkg-config
+    - libbz2-dev
+    # MPI support
+    - libopenmpi-dev
+    - openmpi-bin
+    tags:
+      - easy
+
+
+  - name: Disable Strict Host Key Checking in SSH Config
+    lineinfile: >
+      dest=/etc/ssh/ssh_config
+      line="StrictHostKeyChecking no" 
+      insertafter='EOF' 
+      state=present
+    tags:
+      - easy
+
+  - name: Install openmpi
+    apt: name={{ item }} state=present
+    with_items:
+      - openmpi-bin
+      - openmpi-doc
+      - libopenmpi-dev
+      - openmpi-checkpoint
+      - openmpi-common
+    tags:
+      - easy
+
+  - name: Install git
+    apt: name={{ item }} state=present
+    with_items:
+      - git
+    tags:
+      - easy
+      
+  - name: Git clone password cracker
+    git:
+        repo: 'https://github.com/wandersonca/HPC-Password-Cracker.git'
+        dest: "{{ CLUSTER_LOCATION }}"
+    tags:
+      - easy
+
+  - name: make cluster cracker
+    shell: sudo make mpi 
+    args:
+      chdir: "{{ CLUSTER_LOCATION }}/HPC-Password-Cracker"
+    tags:
+      - easy
+
+  
