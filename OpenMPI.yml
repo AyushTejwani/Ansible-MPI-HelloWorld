@@ -8,9 +8,12 @@
     TEMP_LOCATION: /tmp/openmpi
     FINAL_LOCATION: /opt/openmpi-1.10.2
     DEBUG_LOCATION: /tmp/openMPI-examples
+    CLUSTER_LOCATION: /tmp/cluster_password_cracker
     ansible_ssh_user: vagrant
     ansible_ssh_pass: vagrant
     mpi_tutorial_zip: 'https://github.com/mpitutorial/mpitutorial.git'
+    password_cracker_zip: 'https://github.com/wandersonca/HPC-Password-Cracker'
+    password_cracker_dest: "{{ CLUSTER_LOCATION }}/HPC-Password-Cracker"
     mpi_tutorial_repo_dest: "{{ DEBUG_LOCATION }}/mpitutorial-master"
     johntheripper_dest: /tmp/JohnTheRipper
   name: OpenMPI Deployment beginning ...
@@ -78,8 +81,6 @@
     tags:
       - easy
 
-  
-
   - name: Extract MPI Tutorial project
     git:
         repo: 'https://github.com/mpitutorial/mpitutorial.git'
@@ -113,4 +114,18 @@
     tags:
       - easy
 
- 
+  - name: Git clone password cracker
+    git:
+        repo: 'https://github.com/wandersonca/HPC-Password-Cracker.git'
+        dest: "{{ CLUSTER_LOCATION }}"
+    tags:
+      - easy
+
+  - name: make cluster cracker
+    shell: make mpi 
+    args:
+      chdir: "{{ CLUSTER_LOCATION }}/HPC-Password-Cracker"
+    tags:
+      - easy
+
+  
