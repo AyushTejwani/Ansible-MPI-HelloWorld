@@ -104,6 +104,6 @@
   - name: Build JTR
     shell: sudo make mpi
     args:
-      chdir: "{{ CLUSTER_LOCATION }}/src"
+      chdir: "{{ CLUSTER_LOCATION }}"
     tags:
       - easy
