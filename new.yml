@@ -50,8 +50,6 @@
     # MPI support
     - libopenmpi-dev
     - openmpi-bin
-    - nfs-kernel-server
-    - nfs-common
     tags:
       - easy
 
@@ -103,7 +101,7 @@
       - easy
 
 
-  - name: Build JTR
+  - name: Build cluster library
     shell: sudo make mpi
     args:
       chdir: "{{ CLUSTER_LOCATION }}"
